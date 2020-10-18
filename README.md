@@ -7,9 +7,9 @@
 
   * 1st Nueral network is a single linear layer with log softmax tuning.
 
-  * 2nd Nueral networks is 2 layered. The hidden layers have Tanh tuning while the output has log softmax.
+  * 2nd Nueral network is 2 layered. The hidden layers have Tanh tuning while the output has log softmax.
 
-  
+  * 3rd Neural network is 4 layered. 2 convolutional layers follwed by a hidden layer which are activated using reLU and a final output layer activated by log softmax.
 
   ### How to run
 
@@ -17,6 +17,7 @@
 
   * 2 layer neural network can be ran using 'python3 kuzu_main.py --net full'
 
+  * 2 convolutional layers with one hidden layer and 1 output layer can be ran using 'python3 kuzu_main.py --net conv'
 
   ### Requrired libraries
 
