@@ -46,6 +46,28 @@ class NetConv(nn.Module):
     def __init__(self):
         super(NetConv, self).__init__()
         # INSERT CODE HERE
+        self.convolutionalLayer1 = nn.Sequential(
+            nn.Conv2d(1, 32, kernel_size=5, stride=1, padding=2),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2, stride=2))
+        self.convolutionalLayer2 = nn.Sequential(
+            nn.Conv2d(32, 64, kernel_size=5, stride=1, padding=2),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2, stride=2))
+        self.drop_out = nn.Dropout()
+        self.hiddenLayer = nn.Sequential(
+            nn.Linear(7 * 7 * 64, 10 * 50),
+            nn.ReLU()
+        )
+        self.outputLayer = nn.Linear(10 * 50, 10)
+        self.logSoftmax = nn.LogSoftmax(dim=1)
 
     def forward(self, x):
-        return 0 # CHANGE CODE HERE
+        x = self.convolutionalLayer1(x)
+        x = self.convolutionalLayer2(x)
+        x = x.reshape(x.size(0), -1)
+        x = self.drop_out(x)
+        x = self.hiddenLayer(x)
+        x = self.outputLayer(x)
+        x = self.logSoftmax(x)
+        return x # CHANGE CODE HERE
