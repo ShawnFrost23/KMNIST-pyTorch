@@ -25,7 +25,8 @@ class NetFull(nn.Module):
         super(NetFull, self).__init__()
         # INSERT CODE HERE
         self.inputLayer = nn.Linear(28 * 28, 10 * 15)
-        self.hiddenLayer = nn.Linear(10 * 15, 10)
+        self.hiddenLayer = nn.Linear(10 * 15, 10 * 7)
+        self.outputLayer = nn.Linear(10 * 7, 10)
         self.hyperbolicTan = nn.Tanh()
         self.logSoftmax = nn.LogSoftmax(dim=1)
 
@@ -34,6 +35,8 @@ class NetFull(nn.Module):
         x = self.inputLayer(x)
         x = self.hyperbolicTan(x)
         x = self.hiddenLayer(x)
+        x = self.hyperbolicTan(x)
+        x = self.outputLayer(x)
         x = self.logSoftmax(x)
         return x # CHANGE CODE HERE
 
